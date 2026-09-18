@@ -1,0 +1,7 @@
+# O MCP Toolbox com o cardápio da Aurora embutido.
+# Container Apps não monta arquivo solto, então o tools.yaml entra na imagem.
+FROM us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
+
+COPY tools.yaml /config/tools.yaml
+
+ENTRYPOINT ["toolbox", "--tools-file", "/config/tools.yaml", "--address", "0.0.0.0", "--port", "5000"]

@@ -1,0 +1,42 @@
+# Versões FIXADAS de propósito.
+#
+# Sem pin, o pip monta combinações que não funcionam entre si. A que ele
+# escolheu sozinho em 18/09/2026 juntava agent-framework 1.19.0 com
+# agent-framework-azure-ai 1.0.0rc6, e o segundo importa BaseContextProvider,
+# que o primeiro já não tem. O agente nem chegava a construir.
+#
+# O agent-framework-azure-ai foi descontinuado: parou na rc6 e não acompanha
+# o core 1.x. Quem o substitui são os dois pacotes abaixo:
+#   agent-framework-openai    -> OpenAIChatClient, com azure_endpoint (modo aoai)
+#   agent-framework-foundry   -> FoundryChatClient (modo foundry)
+#
+# Para atualizar: suba uma versão por vez e rode os seis labs. A API desta
+# família ainda se move, e os nomes mudaram uma vez (ChatAgent -> Agent,
+# ai_function -> tool, AgentThread -> AgentSession). A tabela completa de
+# equivalências está em comum/clients.py.
+
+# Núcleo do Microsoft Agent Framework
+agent-framework==1.19.0
+agent-framework-core==1.19.0
+
+# Clientes de modelo: Azure OpenAI e Azure AI Foundry
+agent-framework-openai==1.14.4
+agent-framework-foundry==1.13.1
+
+# Orquestrações: SequentialBuilder, ConcurrentBuilder, HandoffBuilder, Magentic
+agent-framework-orchestrations==1.2.0
+
+# Memória: RedisHistoryProvider e RedisContextProvider (labs 02a e 02b)
+agent-framework-redis==1.0.0b260918
+redis==7.1.1
+
+# Identidade e observabilidade Azure
+azure-identity==1.25.3
+azure-monitor-opentelemetry==1.8.10
+
+# Labs 03 e mock API
+httpx==0.28.1
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+
+python-dotenv==1.2.3

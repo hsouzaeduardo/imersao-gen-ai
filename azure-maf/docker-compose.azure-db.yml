@@ -1,0 +1,46 @@
+# Toolbox no notebook, banco no Azure.
+#
+# Use quando a base já está no Azure Database for PostgreSQL e você não
+# quer (ou não pode) subir Container Apps: o Toolbox roda local e fala
+# com o Postgres gerenciado. O agente continua enxergando só
+# TOOLBOX_MCP_URL=http://localhost:5000/mcp, igual ao Plano B.
+#
+#   docker compose -f docker-compose.azure-db.yml up -d
+#
+# Lê POSTGRES_* do .env. Sem isso o Compose falha na hora, com a mensagem
+# entre aspas abaixo, em vez de subir um Toolbox que só quebra na
+# primeira query — erro cedo e explícito vale uma aula inteira.
+#
+# Pré-requisito: o IP desta máquina precisa estar liberado no firewall do
+# servidor. Confira com:
+#   az postgres flexible-server firewall-rule list -n <servidor> -g <rg> -o table
+services:
+  toolbox:
+    image: us-central1-docker.pkg.dev/database-toolbox/toolbox/toolbox:latest
+    container_name: aurora-toolbox
+    command: ["toolbox", "--tools-file", "/config/tools.yaml", "--address", "0.0.0.0", "--port", "5000"]
+    ports: ["5000:5000"]
+    volumes:
+      - ./lab04_mcp_toolbox/tools.yaml:/config/tools.yaml:ro
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST:?defina POSTGRES_HOST no .env}
+      POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+      POSTGRES_DB: ${POSTGRES_DB:?defina POSTGRES_DB no .env}
+      POSTGRES_USER: ${POSTGRES_USER:?defina POSTGRES_USER no .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+
+  mock_api:
+    image: python:3.12-slim
+    container_name: aurora-mock-api
+    working_dir: /app
+    command: >
+      sh -c "pip install --no-cache-dir fastapi uvicorn &&
+             uvicorn main:app --host 0.0.0.0 --port 8000"
+    ports: ["8000:8000"]
+    volumes:
+      - ./mock_api:/app:ro
+
+  redis:
+    image: redis:7-alpine
+    container_name: aurora-redis
+    ports: ["6379:6379"]

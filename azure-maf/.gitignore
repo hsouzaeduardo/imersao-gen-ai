@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.azure/
+*.sqlite
+
+# Gerado pelo lab 02b em tempo de execução, não é fonte.
+# O README manda apagar antes da aula, para a demo começar limpa.
+lab02_memoria/prontuarios.json

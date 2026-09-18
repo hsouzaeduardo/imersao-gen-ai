@@ -1,0 +1,161 @@
+# ============================================================================
+# Cardápio de consultas aprovadas da Aurora Fibra.
+#
+# O time de Dados não entrega a senha do banco para o agente.
+# Entrega este arquivo: cada tool é uma query parametrizada, revisada,
+# com escopo fechado. O agente escolhe qual chamar, nunca o que executar.
+#
+# Subir: toolbox --tools-file tools.yaml
+# (no docker compose deste repo isso já sobe pronto na porta 5000)
+# ============================================================================
+
+sources:
+  aurora-postgres:
+    kind: postgres
+    host: ${POSTGRES_HOST}
+    port: ${POSTGRES_PORT}
+    database: ${POSTGRES_DB}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+tools:
+
+  buscar_cliente_por_cpf:
+    kind: postgres-sql
+    source: aurora-postgres
+    description: >
+      Busca o cadastro do cliente pelo CPF e retorna nome, cidade, CEP,
+      data de início do relacionamento e os dados do contrato ativo.
+      Use como primeiro passo sempre que o cliente se identificar.
+    parameters:
+      - name: cpf
+        type: string
+        description: CPF do cliente, somente dígitos, sem pontos ou hífen.
+    statement: |
+      SELECT c.id,
+             c.nome,
+             c.cidade,
+             c.uf,
+             c.cep,
+             c.cliente_desde,
+             ct.plano,
+             ct.velocidade_mbps,
+             ct.mensalidade,
+             ct.tecnologia,
+             ct.status AS status_contrato,
+             ct.dia_vencimento
+      FROM clientes c
+      LEFT JOIN contratos ct ON ct.cliente_id = c.id
+      WHERE c.cpf = $1;
+
+  listar_faturas_em_aberto:
+    kind: postgres-sql
+    source: aurora-postgres
+    description: >
+      Lista as faturas em aberto ou vencidas de um cliente, da mais antiga
+      para a mais recente. Use em qualquer assunto de cobrança e também
+      antes de agendar visita técnica, porque contrato suspenso não gera visita.
+    parameters:
+      - name: cpf
+        type: string
+        description: CPF do cliente, somente dígitos.
+    statement: |
+      SELECT f.competencia,
+             f.valor,
+             f.vencimento,
+             f.status
+      FROM faturas f
+      JOIN contratos ct ON ct.id = f.contrato_id
+      JOIN clientes c ON c.id = ct.cliente_id
+      WHERE c.cpf = $1
+        AND f.status IN ('aberta', 'vencida')
+      ORDER BY f.vencimento ASC;
+
+  listar_chamados_recentes:
+    kind: postgres-sql
+    source: aurora-postgres
+    description: >
+      Retorna os chamados do cliente nos últimos 90 dias, com categoria,
+      descrição, status e técnico responsável. Use para verificar reincidência
+      antes de abrir um chamado novo.
+    parameters:
+      - name: cpf
+        type: string
+        description: CPF do cliente, somente dígitos.
+    statement: |
+      SELECT ch.id,
+             ch.abertura,
+             ch.categoria,
+             ch.descricao,
+             ch.status,
+             ch.tecnico
+      FROM chamados ch
+      JOIN clientes c ON c.id = ch.cliente_id
+      WHERE c.cpf = $1
+        AND ch.abertura >= NOW() - INTERVAL '90 days'
+      ORDER BY ch.abertura DESC;
+
+  consultar_agenda_tecnica:
+    kind: postgres-sql
+    source: aurora-postgres
+    description: >
+      Mostra as visitas técnicas já agendadas para o cliente, com data,
+      turno e técnico. Use antes de oferecer novo agendamento.
+    parameters:
+      - name: cpf
+        type: string
+        description: CPF do cliente, somente dígitos.
+    statement: |
+      SELECT a.data_visita,
+             a.turno,
+             a.tecnico,
+             a.status
+      FROM agenda_tecnica a
+      JOIN chamados ch ON ch.id = a.chamado_id
+      JOIN clientes c ON c.id = ch.cliente_id
+      WHERE c.cpf = $1
+      ORDER BY a.data_visita DESC;
+
+  abrir_chamado:
+    kind: postgres-sql
+    source: aurora-postgres
+    description: >
+      Abre um chamado técnico para o cliente. AÇÃO DE ESCRITA.
+      Só use depois de confirmar com o cliente o resumo do problema.
+      Categoria precisa ser uma entre lentidao, sem_conexao, cobranca, instalacao.
+    parameters:
+      - name: cpf
+        type: string
+        description: CPF do cliente, somente dígitos.
+      - name: categoria
+        type: string
+        description: lentidao, sem_conexao, cobranca ou instalacao.
+      - name: descricao
+        type: string
+        description: Relato do problema em uma frase, nas palavras do cliente.
+    statement: |
+      INSERT INTO chamados (cliente_id, abertura, categoria, descricao, status)
+      SELECT c.id, NOW(), $2, $3, 'aberto'
+      FROM clientes c
+      WHERE c.cpf = $1
+      RETURNING id, abertura, categoria, status;
+
+toolsets:
+
+  # O que o atendimento N1 pode fazer. Note que abrir_chamado está de fora:
+  # no lab 05 ele vai para o agente técnico, e só para ele.
+  atendimento_n1:
+    - buscar_cliente_por_cpf
+    - listar_faturas_em_aberto
+    - listar_chamados_recentes
+    - consultar_agenda_tecnica
+
+  cobranca:
+    - buscar_cliente_por_cpf
+    - listar_faturas_em_aberto
+
+  tecnico:
+    - buscar_cliente_por_cpf
+    - listar_chamados_recentes
+    - consultar_agenda_tecnica
+    - abrir_chamado
