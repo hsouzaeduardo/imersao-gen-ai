@@ -1,0 +1,16 @@
+<section id="lab02a-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#F7F6F2">A sessão morre com o processo</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#1E2B39; border:1px solid #2E3F52; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#F7F6F2">Sem Redis</h3>
+      <p style="font-size:32px; line-height:1.35; color:#A8B6C2">Esquece.</p>
+    </div>
+    <div style="flex:1; background:#1E2B39; border:1px solid #2E3F52; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#F7F6F2">Com Redis</h3>
+      <p style="font-size:32px; line-height:1.35; color:#A8B6C2">Lembra.</p>
+    </div>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Três réplicas, três atendentes.</p>
+  <aside>Em desenvolvimento não incomoda, porque o processo fica de pé. Em produção, com réplicas atrás de um balanceador, o cliente troca de atendente a cada frase. Mesmo código nos dois lados: muda só o context_providers apontando para o Redis. Abra o redis-cli e mostre as mensagens cruas — memória de conversa é uma lista num banco, não mágica.</aside>
+</section>

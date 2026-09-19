@@ -36,6 +36,7 @@ a tabela de tradução conceito a conceito entre as duas pilhas.
 
 Em `azure-maf/docs/`:
 
+- [`slides/`](azure-maf/docs/slides/) — o deck do curso, para abrir no navegador.
 - [`roteiros/`](azure-maf/docs/roteiros/) — um roteiro detalhado por lab, com as
   falas e as edições ao vivo. É o que se abre durante a aula.
 - [`COMO_EXECUTAR.md`](azure-maf/docs/COMO_EXECUTAR.md) — passo a passo de execução de

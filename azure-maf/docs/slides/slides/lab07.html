@@ -1,0 +1,9 @@
+<section id="lab07" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 07 · O agente que não é seu</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">A mesma linha, outro dono</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#F7F6F2">remoto</span> = A2AAgent(url=&quot;http://...:9000&quot;)<br>&nbsp;<br>Agent(cliente, INSTRUCTION, tools=[<br>    remoto.<span style="color:#D96C3B">as_tool</span>(name=&quot;consultar_tecnico&quot;),<br>])</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">MCP padronizou o dado. A2A padroniza o agente.</p>
+  <aside>A linha do as_tool é idêntica à do lab 05, byte a byte. O que mudou foi onde o especialista mora, e o maestro não tem como saber. É o mesmo movimento do lab 04, um nível acima: lá o agente parou de falar com o banco e passou a falar com um servidor MCP; aqui parou de importar o especialista e passa a falar com um endpoint A2A. Rode --card antes do código: o agent card é o contrato, e tem o mesmo formato da description de uma tool. Depois derrube o servidor do outro time: agora o especialista é dependência de rede, com timeout, versão e alguém de plantão que não é você.</aside>
+</section>

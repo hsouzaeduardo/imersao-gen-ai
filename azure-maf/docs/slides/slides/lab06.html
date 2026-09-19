@@ -1,0 +1,24 @@
+<section id="lab06" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 06 · O processo operacional</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Tirar a decisão do modelo</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Sequencial</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Ordem fixa, sempre.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Concorrente</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Independentes, em paralelo.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Loop</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Um crítico aprova.</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:44px; align-items:center; background:#16202B; border-radius:16px; padding:32px 48px">
+    <p style="font-size:60px; font-weight:700; color:#F7F6F2; white-space:nowrap">12,8s &rarr; 7,4s</p>
+    <p style="font-size:60px; font-weight:700; color:#D96C3B; white-space:nowrap">1,7&times;</p>
+    <p style="font-size:30px; line-height:1.3; color:#A8B6C2">Cota triplicou no mesmo instante.</p>
+  </div>
+  <aside>Quando o processo é obrigatório, tirar a decisão do LLM não é limitação: é o requisito. Rode 'run comparar' com os dois tempos na tela. A outra metade da conta: latência caiu, custo não mudou, pressão de cota triplicou. Se a turma toda rodar junto e o deployment estourar TPM ao vivo, melhor ainda — é a aula acontecendo sozinha. E não existe LoopAgent no MAF: o loop é seu, em Python ou como ciclo no WorkflowBuilder.</aside>
+</section>

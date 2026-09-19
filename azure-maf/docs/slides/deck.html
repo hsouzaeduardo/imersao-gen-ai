@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>A evolução do ARI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    html, body { margin:0; height:100%; background:#0d1117; overflow:hidden;
+                  font-family:'IBM Plex Sans', Verdana, sans-serif }
+    #palco { position:fixed; inset:0; display:grid; place-items:center }
+    .folha { width:1920px; height:1080px; display:none; position:relative;
+              box-shadow:0 24px 80px rgba(0,0,0,.6) }
+    .folha.ativa { display:block }
+    .folha > section { position:relative; width:1920px; height:1080px;
+                        box-sizing:border-box }
+    /* x-connector é um elemento do runtime do Artifact. Aqui vira uma linha
+       simples, sem ponta de seta: o desenho continua legível. */
+    x-connector { display:inline-block; height:3px; background:currentColor;
+                   align-self:center; min-width:60px }
+    #barra { position:fixed; left:0; right:0; bottom:0; height:34px;
+              display:flex; align-items:center; gap:18px; padding:0 18px;
+              background:rgba(13,17,23,.92); color:#8b98a5; font-size:13px }
+    #notas { position:fixed; left:0; right:0; bottom:34px; max-height:38vh;
+              overflow:auto; padding:20px 26px; background:rgba(13,17,23,.97);
+              color:#c9d4e0; font-size:16px; line-height:1.55; display:none;
+              border-top:1px solid #2e3f52 }
+    #notas.aberto { display:block }
+  </style>
+</head>
+<body>
+  <div id="palco"><div id="pilha">
+<div class="folha" data-i="0">
+<section id="capa" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; justify-content:center; gap:36px">
+  <div style="position:absolute; left:0px; top:0px; width:12px; height:1080px; background:#D96C3B"></div>
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">Imersão Gen AI · Azure + Microsoft Agent Framework</p>
+  <h1 style="font-size:148px; font-weight:700; line-height:1; color:#F7F6F2">A evolução do ARI</h1>
+  <p style="font-size:46px; line-height:1.35; color:#A8B6C2">Oito labs. Oito falhas.</p>
+  <p style="position:absolute; left:128px; bottom:64px; font-size:24px; color:#A8B6C2">Aurora Fibra · suporte N1</p>
+  
+</section>
+</div>
+<div class="folha" data-i="1">
+<section id="cenario" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">O cenário</p>
+  <h1 style="font-size:112px; font-weight:700; line-height:1.1; color:#16202B">400 mil assinantes.<br><span style="color:#5A6672">Um estagiário no primeiro dia.</span></h1>
+  
+</section>
+</div>
+<div class="folha" data-i="2">
+<section id="metodo" data-transition="fade" style="background:#D96C3B; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center">
+  <h1 style="font-size:104px; font-weight:700; line-height:1.1; color:#16202B; width:1560px">Cada lab existe porque o anterior falhou de um jeito específico.</h1>
+  
+</section>
+</div>
+<div class="folha" data-i="3">
+<section id="lab01" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 01 · Primeiro dia, sem crachá</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">O agente inteiro</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2">Agent(<br>    OpenAIChatClient(azure_endpoint=...),<br>    INSTRUCTION,<br>)</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Sem runner. Sem servidor. Sem sessão.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="4">
+<section id="lab01-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#F7F6F2">Ele esquece o CPF</h2>
+  <div style="background:#1E2B39; border:1px solid #2E3F52; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#A8B6C2">Cliente:</span> meu CPF é 111.222.333-44, qual o status?<br><span style="color:#D96C3B">ARI:</span>&nbsp;&nbsp;&nbsp; ...não tenho acesso a sistemas da Aurora.<br>&nbsp;<br><span style="color:#A8B6C2">Cliente:</span> qual era mesmo o meu CPF?<br><span style="color:#D96C3B">ARI:</span>&nbsp;&nbsp;&nbsp; Não consigo ver ou informar o seu CPF.</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Ninguém criou uma sessão.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="5">
+<section id="lab02a" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 02a · O caderno de anotações</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">A sessão, criada à mão</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2">sessao = agente.create_session(session_id=&quot;atendimento:001&quot;)<br>await agente.run(fala, session=sessao)</p>
+  </div>
+  <div style="background:#FFFFFF; border:1px solid #E4E2DA; border-left:6px solid #3D7F8F; border-radius:12px; padding:32px 40px">
+    <p style="font-size:34px; line-height:1.35; color:#16202B">&ldquo;Vou incluir <b>também</b> que ontem caiu por 2 horas.&rdquo;</p>
+  </div>
+  
+</section>
+</div>
+<div class="folha" data-i="6">
+<section id="lab02a-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#F7F6F2">A sessão morre com o processo</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#1E2B39; border:1px solid #2E3F52; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#F7F6F2">Sem Redis</h3>
+      <p style="font-size:32px; line-height:1.35; color:#A8B6C2">Esquece.</p>
+    </div>
+    <div style="flex:1; background:#1E2B39; border:1px solid #2E3F52; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#F7F6F2">Com Redis</h3>
+      <p style="font-size:32px; line-height:1.35; color:#A8B6C2">Lembra.</p>
+    </div>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Três réplicas, três atendentes.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="7">
+<section id="lab02b" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 02b · O prontuário do cliente</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Duas memórias, dois ciclos de vida</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Sessão</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">A conversa de hoje.</p><p style="font-size:30px; line-height:1.35; color:#5A6672">Morre no fim do atendimento.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Prontuário</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">O que vale para sempre.</p><p style="font-size:30px; line-height:1.35; color:#5A6672">Sobrevive ao processo.</p>
+    </div>
+  </div>
+  
+</section>
+</div>
+<div class="folha" data-i="8">
+<section id="lab02b-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:88px; font-weight:600; line-height:1.12; color:#F7F6F2">Lembra de tudo.<br><span style="color:#A8B6C2">Não sabe de nada.</span></h2>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Nenhum sistema da Aurora ao alcance dele.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="9">
+<section id="lab03" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 03 · O primeiro acesso ao sistema</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">A description é o contrato</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2">@tool(<br>  name=&quot;consultar_status_rede&quot;,<br>  description=&quot;Retorna a situação de um CEP.<br>  Use sempre que o cliente relatar lentidão...&quot;,<br>)</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Troque por &ldquo;Consulta coisas&rdquo; e ele erra a hora.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="10">
+<section id="lab03-guardrail" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 03 · A política</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Instruction pede. Middleware garante.</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#A8B6C2">Cliente:</span> reinicia meu roteador agora<br><span style="color:#D96C3B">middleware:</span> bloqueado &mdash; sem autorização<br><span style="color:#3D7F8F">ARI:</span>&nbsp;&nbsp;&nbsp; ...preciso da sua autorização explícita.</p>
+  </div>
+  
+</section>
+</div>
+<div class="folha" data-i="11">
+<section id="lab03-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:88px; font-weight:600; line-height:1.12; color:#F7F6F2">&ldquo;E a minha fatura de agosto?&rdquo;</h2>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Está no banco. Ele não tem a chave.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="12">
+<section id="lab04" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 04 · A chave do banco de dados</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Ninguém entrega a senha. Entrega o cardápio.</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#D96C3B">listar_faturas_em_aberto:</span><br>  parameters: [cpf]<br>  statement: SELECT f.competencia, f.valor, f.status<br>    FROM faturas f ... WHERE c.cpf = $1</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Ele escolhe qual chamar, nunca o que executar.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="13">
+<section id="lab04-blast" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 04 · O desenho</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">O blast radius é o cardápio</h2>
+  <div style="display:flex; gap:20px; align-items:center; justify-content:center">
+    <div style="width:380px; background:#FFFFFF; border:1px solid #E4E2DA; border-radius:16px; padding:40px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Agente</h3>
+      <p style="font-size:28px; line-height:1.35; color:#5A6672">Sem credencial.</p>
+    </div>
+    <x-connector head="end" style="width:110px; color:#3D7F8F; border-width:3px"></x-connector>
+    <div style="width:380px; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:40px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Toolbox</h3>
+      <p style="font-size:28px; line-height:1.35; color:#5A6672">Cinco queries aprovadas.</p>
+    </div>
+    <x-connector head="end" style="width:110px; color:#3D7F8F; border-width:3px"></x-connector>
+    <div style="width:380px; background:#FFFFFF; border:1px solid #E4E2DA; border-radius:16px; padding:40px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">PostgreSQL</h3>
+      <p style="font-size:28px; line-height:1.35; color:#5A6672">Rede privada.</p>
+    </div>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">O agente nunca fala com o banco.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="14">
+<section id="lab04-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:88px; font-weight:600; line-height:1.12; color:#F7F6F2">Um agente. Três assuntos.<br><span style="color:#A8B6C2">Nenhuma especialidade.</span></h2>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Trata na ordem errada.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="15">
+<section id="lab05" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 05 · Promovido a líder de equipe</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Duas topologias</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Handoff</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">O especialista assume.</p><p style="font-size:30px; line-height:1.35; color:#5A6672">Duas vozes, em sequência.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">as_tool</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">O maestro consulta.</p><p style="font-size:30px; line-height:1.35; color:#5A6672">Uma voz, integrada.</p>
+    </div>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Contrato suspenso &rarr; roteador vermelho.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="16">
+<section id="lab05-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#F7F6F2">Roteamento por LLM é probabilístico</h2>
+  <div style="background:#1E2B39; border:1px solid #2E3F52; border-left:6px solid #D96C3B; border-radius:12px; padding:36px 44px">
+    <p style="font-size:42px; font-weight:600; line-height:1.3; color:#F7F6F2">Regra de compliance não pode ser.</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">A ordem obrigatória mora na topologia.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="17">
+<section id="lab06" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 06 · O processo operacional</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Tirar a decisão do modelo</h2>
+  <div style="display:flex; gap:28px; align-items:stretch">
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Sequencial</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Ordem fixa, sempre.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #D96C3B; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Concorrente</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Independentes, em paralelo.</p>
+    </div>
+    <div style="flex:1; background:#FFFFFF; border:1px solid #E4E2DA; border-top:6px solid #3D7F8F; border-radius:16px; padding:44px; display:flex; flex-direction:column; gap:16px">
+      <h3 style="font-size:38px; font-weight:600; color:#16202B">Loop</h3>
+      <p style="font-size:32px; line-height:1.35; color:#5A6672">Um crítico aprova.</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:44px; align-items:center; background:#16202B; border-radius:16px; padding:32px 48px">
+    <p style="font-size:60px; font-weight:700; color:#F7F6F2; white-space:nowrap">12,8s &rarr; 7,4s</p>
+    <p style="font-size:60px; font-weight:700; color:#D96C3B; white-space:nowrap">1,7&times;</p>
+    <p style="font-size:30px; line-height:1.3; color:#A8B6C2">Cota triplicou no mesmo instante.</p>
+  </div>
+  
+</section>
+</div>
+<div class="folha" data-i="18">
+<section id="lab06-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:88px; font-weight:600; line-height:1.12; color:#F7F6F2">Todos os agentes<br><span style="color:#A8B6C2">são seus.</span></h2>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">O especialista real é de outro time.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="19">
+<section id="lab07" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 07 · O agente que não é seu</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">A mesma linha, outro dono</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#F7F6F2">remoto</span> = A2AAgent(url=&quot;http://...:9000&quot;)<br>&nbsp;<br>Agent(cliente, INSTRUCTION, tools=[<br>    remoto.<span style="color:#D96C3B">as_tool</span>(name=&quot;consultar_tecnico&quot;),<br>])</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">MCP padronizou o dado. A2A padroniza o agente.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="20">
+<section id="lab07-falha" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#D96C3B">A falha</p>
+  <h2 style="font-size:88px; font-weight:600; line-height:1.12; color:#F7F6F2">&ldquo;Funcionou na demo&rdquo;<br><span style="color:#A8B6C2">não é evidência.</span></h2>
+  <p style="font-size:34px; line-height:1.35; color:#A8B6C2">Sete labs validados por alguém olhando uma execução.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="21">
+<section id="lab08" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 08 · A prova de que funciona</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">A mesma massa, dois prompts</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:30px; line-height:1.7; color:#F7F6F2"><span style="color:#A8B6C2">Variante A (vaga)</span>        6/8<br><span style="color:#A8B6C2">Variante B (protocolo)</span>   7/8<br>&nbsp;<br><span style="color:#D96C3B">Onde discordam:</span><br>  reinicio_sem_autorizacao</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Com a vaga, ele reinicia o roteador sem pedir autorização.</p>
+  
+</section>
+</div>
+<div class="folha" data-i="22">
+<section id="quadro" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:36px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">O caminho inteiro</p>
+  <h2 style="font-size:72px; font-weight:600; line-height:1.12; color:#16202B">Oito falhas, oito peças</h2>
+  <table style="font-family:'IBM Plex Sans', Verdana, sans-serif; font-size:26px; color:#16202B; padding:15px 22px">
+    <tr style="background:#16202B">
+      <th style="width:10%; color:#F7F6F2; text-align:left; font-weight:600">Lab</th>
+      <th style="width:45%; color:#F7F6F2; text-align:left; font-weight:600">A falha</th>
+      <th style="width:45%; color:#F7F6F2; text-align:left; font-weight:600">A peça</th>
+    </tr>
+    <tr><td>01</td><td style="color:#5A6672">Esquece o CPF</td><td>AgentSession</td></tr>
+    <tr style="background:#FFFFFF"><td>02a</td><td style="color:#5A6672">A sessão morre com o processo</td><td>Histórico em Redis</td></tr>
+    <tr><td>02b</td><td style="color:#5A6672">Lembra de tudo, não sabe de nada</td><td>Prontuário</td></tr>
+    <tr style="background:#FFFFFF"><td>03</td><td style="color:#5A6672">Não alcança sistema nenhum</td><td>Tool e guardrail</td></tr>
+    <tr><td>04</td><td style="color:#5A6672">Não tem a chave do banco</td><td>MCP Toolbox</td></tr>
+    <tr style="background:#FFFFFF"><td>05</td><td style="color:#5A6672">Um agente, três assuntos</td><td>Handoff e as_tool</td></tr>
+    <tr><td>06</td><td style="color:#5A6672">Roteamento probabilístico</td><td>Orquestração</td></tr>
+    <tr style="background:#FFFFFF"><td>07</td><td style="color:#5A6672">Todos os agentes são seus</td><td>A2A</td></tr>
+    <tr><td>08</td><td style="color:#5A6672">&ldquo;Funcionou na demo&rdquo;</td><td>Avaliação e A/B</td></tr>
+  </table>
+  
+</section>
+</div>
+<div class="folha" data-i="23">
+<section id="fecho" data-transition="fade" style="background:#16202B; color:#F7F6F2; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; justify-content:center; gap:52px">
+  <div style="position:absolute; left:0px; top:0px; width:12px; height:1080px; background:#D96C3B"></div>
+  <h1 style="font-size:100px; font-weight:700; line-height:1.08; color:#F7F6F2; width:1560px">Framework é detalhe de implementação.</h1>
+  <ul style="font-size:38px; line-height:1.6; color:#A8B6C2">
+    <li>O que é determinístico.</li>
+    <li>O que é julgamento.</li>
+    <li>Onde mora a política.</li>
+    <li>Quem paga o paralelismo.</li>
+  </ul>
+  <p style="position:absolute; left:128px; bottom:64px; font-size:24px; color:#A8B6C2">Tabela de tradução completa em MAPEAMENTO.md</p>
+  
+</section>
+</div>
+  </div></div>
+  <div id="notas"></div>
+  <div id="barra">
+    <span id="pos"></span>
+    <span>← →  navegar</span><span>N  notas</span><span>F  tela cheia</span>
+  </div>
+<script>
+const NOTAS = ["O contrato do curso em uma frase: o agente vai quebrar oito vezes, de propósito, e cada quebra é o que justifica a peça seguinte. A Aurora Fibra é um provedor regional com 400 mil assinantes; o ARI foi contratado hoje como estagiário do N1. Todo dado é fictício, gerado para aula.", "Aurora Fibra: provedor regional, fibra legado e nova fibra convivendo na mesma base, N1 afogado em chamado repetido. O ARI sabe conversar e não conhece nada da empresa — não tem acesso a sistema nenhum. É desse desequilíbrio que os seis labs saem.", "Não vamos construir o agente certo de primeira. Vamos construir o errado, seis vezes, e deixar cada falha escolher a peça seguinte. Se a turma levar só esta frase, a aula já valeu: arquitetura de agente não é catálogo de recursos, é uma sequência de problemas.", "Um cliente de modelo, uma instruction, um run. Tudo o que vem nos próximos cinco labs é acréscimo em cima disto, e cada acréscimo tem um custo que a gente vai nomear. Com ENABLE_OTEL=true, abra o Application Insights e mostre o span chat: modelo, tokens, latência. Aquele número de tokens é o custo do turno, e um atendimento tem uns quinze.", "Não é bug e não é limite do modelo: no MAF, estado de conversa é opt-in. No ADK o runner dava sessão de graça e você nem percebia. Quem vem de lá descobre isso em produção; a turma está descobrindo agora, que sai bem mais barato.", "Duas linhas a mais que o lab 01, e o comportamento muda de três monólogos para uma conversa. Aquele 'também' é a sessão funcionando: ele está acumulando o que o cliente já disse.", "Em desenvolvimento não incomoda, porque o processo fica de pé. Em produção, com réplicas atrás de um balanceador, o cliente troca de atendente a cada frase. Mesmo código nos dois lados: muda só o context_providers apontando para o Redis. Abra o redis-cli e mostre as mensagens cruas — memória de conversa é uma lista num banco, não mágica.", "Confundir as duas é o erro de desenho mais comum em agente de atendimento. E o MAF não tem um state estruturado como o ADK: dado do atendimento vira armazenamento seu. Abra o prontuarios.json na frente da turma — duas frases num JSON indexado por CPF, e é toda a memória de longo prazo. Apague o arquivo, rode de novo, e ele volta a perguntar tudo.", "Ele sabe que a Marcela prefere visita de manhã e aviso por WhatsApp. Não sabe se ela tem fatura em aberto, nem se a rede do bairro dela caiu. Memória não é informação, e agente sem dado corporativo é demonstração, não atendimento. Pergunte à turma o que falta: alguém vai dizer 'integração', e aí você já tem o vocabulário do lab 03.", "A description não é documentação para humano: é o único material que o modelo tem para decidir se chama a tool, e quando. Faça a troca ao vivo — é a demo mais barata e mais convincente do lab, porque nenhuma linha de código muda. Quando a tool de vocês não é chamada, o problema quase nunca está no código dela.", "Ele pediu direto, e não aconteceu. Comente a linha do bloqueio e o roteador do cliente reinicia sem confirmação nenhuma. Política de ação destrutiva não mora na instruction — instruction o modelo pode ignorar, e num dia ruim vai. Em ambiente regulado este middleware é o ponto de auditoria: todo efeito colateral passa por ali.", "Falha planejada: o painel de rede não sabe de fatura. Contrato, chamado e agenda também estão no banco. A pergunta que abre o lab 04 não é técnica, é organizacional: quem entrega acesso a banco de produção para um agente, e em que formato? Segure a pergunta no ar antes de virar o slide.", "Cada tool é uma query parametrizada, revisada, de escopo fechado, entregue pelo time de Dados. Mostre o resultado real: competência 2026-08, R$ 129,90, vencimento 10/08/2026, saído do Postgres no Azure. Depois edite o tools.yaml ao vivo e reinicie SÓ o Toolbox: o comportamento do agente muda sem deploy de agente. Organograma virando arquitetura.", "Se alguém injetar prompt no agente, o estrago máximo é chamar uma das cinco queries que já estavam aprovadas. Três pontos que só existem na versão Azure: identidade gerenciada em vez de senha, private endpoint, e essa separação. Pergunte à turma qual dos três é inegociável na casa deles — a resposta muda o desenho.", "Cobrança, suporte técnico e agendamento no mesmo prompt, com o cardápio inteiro na mão — inclusive a tool de escrita. Use o Wellington, CPF 444.555.666-77: contrato suspenso e três faturas vencidas. Suporte técnico em contrato suspenso não resolve nada, e o agente único não sabe disso.", "Mesma frase do cliente, mesmos especialistas, duas topologias. A pergunta de desenho: o especialista precisa conversar com o cliente, ou devolver informação? Se conversa, handoff; se devolve, as_tool. O remate é o que o maestro produziu de verdade: ligou as três faturas de R$ 69,90 à luz vermelha do roteador. Troque a DESC_TECNICO por 'Agente técnico.' e o roteamento desanda sem uma linha de lógica mudar.", "Rode a mesma frase dez vezes e anote a ordem num flipchart. A instruction manda tratar cobrança primeiro; às vezes ele trata. A variação na frente da turma vale mais que qualquer argumento, e é o gancho direto do lab 06.", "Quando o processo é obrigatório, tirar a decisão do LLM não é limitação: é o requisito. Rode 'run comparar' com os dois tempos na tela. A outra metade da conta: latência caiu, custo não mudou, pressão de cota triplicou. Se a turma toda rodar junto e o deployment estourar TPM ao vivo, melhor ainda — é a aula acontecendo sozinha. E não existe LoopAgent no MAF: o loop é seu, em Python ou como ciclo no WorkflowBuilder.", "No seu processo, no seu requirements.txt, no seu deploy. Na Aurora real o especialista técnico pertence a Operações de Rede: versiona sozinho, sobe quando quer, pode nem ser Python. Você não tem como importar a classe dele, e pedir que ele vire biblioteca no seu repositório é pedir que dois times passem a subir junto.", "A linha do as_tool é idêntica à do lab 05, byte a byte. O que mudou foi onde o especialista mora, e o maestro não tem como saber. É o mesmo movimento do lab 04, um nível acima: lá o agente parou de falar com o banco e passou a falar com um servidor MCP; aqui parou de importar o especialista e passa a falar com um endpoint A2A. Rode --card antes do código: o agent card é o contrato, e tem o mesmo formato da description de uma tool. Depois derrube o servidor do outro time: agora o especialista é dependência de rede, com timeout, versão e alguém de plantão que não é você.", "Quando o modelo mudar de versão, quando alguém ajustar uma instruction, quando o time de Dados acrescentar uma query no tools.yaml, você precisa saber o que regrediu — e precisa saber em minutos, não em reclamação de cliente.", "É a tese do lab 01 — instruction é código — agora com número em vez de opinião. Dois outros achados valem a aula: um caso falha nas DUAS variantes, porque a regra 1 do protocolo manda pedir CPF antes de tudo e o caso só dá o CEP; e um caso oscila entre execuções, 50% de aprovação. Agente é amostra, não assertiva: taxa é a métrica, não passou/falhou. Feche comentando o MiddlewareTermination do lab 03 e rodando a suite: a regressão é pega em segundos.", "Slide de retomada do segundo encontro. Leia só a coluna do meio, de cima para baixo: é a história do ARI. A coluna da direita é apenas a consequência técnica de cada linha dela. Se for usar a UI, este é o momento: abra o DevUI com python -m ui e mostre os 22 agentes dessa tabela numa tela só.", "Entre ADK e MAF, e entre versões do próprio MAF, o que muda são nomes de classe. Quem sabe nomear essas quatro perguntas sabe agentes, não sabe um framework. É isso que o curso ensina de verdade."];
+const folhas = [...document.querySelectorAll('.folha')];
+const pilha = document.getElementById('pilha');
+let i = 0;
+
+function escalar() {
+  const e = Math.min(innerWidth / 1920, (innerHeight - 34) / 1080);
+  pilha.style.transform = `scale(${e})`;
+  pilha.style.width = '1920px';
+  pilha.style.height = '1080px';
+}
+
+function mostrar(n) {
+  i = Math.max(0, Math.min(folhas.length - 1, n));
+  folhas.forEach((f, k) => f.classList.toggle('ativa', k === i));
+  document.getElementById('pos').textContent = `${i + 1} / ${folhas.length}`;
+  document.getElementById('notas').textContent = NOTAS[i] || '(sem notas)';
+  location.hash = i + 1;
+}
+
+addEventListener('resize', escalar);
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') mostrar(i + 1);
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') mostrar(i - 1);
+  else if (e.key === 'Home') mostrar(0);
+  else if (e.key === 'End') mostrar(folhas.length - 1);
+  else if (e.key.toLowerCase() === 'n') document.getElementById('notas').classList.toggle('aberto');
+  else if (e.key.toLowerCase() === 'f') {
+    document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  }
+});
+addEventListener('click', e => { if (!e.target.closest('#notas')) mostrar(i + 1); });
+
+escalar();
+mostrar(Math.max(0, (parseInt(location.hash.slice(1)) || 1) - 1));
+</script>
+</body>
+</html>

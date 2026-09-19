@@ -1,0 +1,9 @@
+<section id="lab04" data-transition="fade" style="background:#F7F6F2; color:#16202B; font-family:'IBM Plex Sans', Verdana, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:44px">
+  <p style="font-size:24px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#B4542A">Lab 04 · A chave do banco de dados</p>
+  <h2 style="font-size:76px; font-weight:600; line-height:1.12; color:#16202B">Ninguém entrega a senha. Entrega o cardápio.</h2>
+  <div style="background:#16202B; border:none; border-radius:14px; padding:44px 52px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; line-height:1.7; color:#F7F6F2"><span style="color:#D96C3B">listar_faturas_em_aberto:</span><br>  parameters: [cpf]<br>  statement: SELECT f.competencia, f.valor, f.status<br>    FROM faturas f ... WHERE c.cpf = $1</p>
+  </div>
+  <p style="font-size:34px; line-height:1.35; color:#5A6672">Ele escolhe qual chamar, nunca o que executar.</p>
+  <aside>Cada tool é uma query parametrizada, revisada, de escopo fechado, entregue pelo time de Dados. Mostre o resultado real: competência 2026-08, R$ 129,90, vencimento 10/08/2026, saído do Postgres no Azure. Depois edite o tools.yaml ao vivo e reinicie SÓ o Toolbox: o comportamento do agente muda sem deploy de agente. Organograma virando arquitetura.</aside>
+</section>

@@ -1,0 +1,83 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-18T13:20:00Z"
+  },
+  "title": "A evolução do ARI",
+  "order": [
+    "capa",
+    "cenario",
+    "metodo",
+    "lab01",
+    "lab01-falha",
+    "lab02a",
+    "lab02a-falha",
+    "lab02b",
+    "lab02b-falha",
+    "lab03",
+    "lab03-guardrail",
+    "lab03-falha",
+    "lab04",
+    "lab04-blast",
+    "lab04-falha",
+    "lab05",
+    "lab05-falha",
+    "lab06",
+    "lab06-falha",
+    "lab07",
+    "lab07-falha",
+    "lab08",
+    "quadro",
+    "fecho"
+  ],
+  "sections": {
+    "s1": {
+      "description": "A Aurora Fibra, o ARI, e o método: cada lab nasce de uma falha",
+      "start": "capa"
+    },
+    "s2": {
+      "description": "O agente sozinho, e o CPF que ele esquece",
+      "start": "lab01"
+    },
+    "s3": {
+      "description": "Memória: a conversa de hoje e o cliente de sempre",
+      "start": "lab02a"
+    },
+    "s4": {
+      "description": "Acesso a sistema externo, com a política no middleware",
+      "start": "lab03"
+    },
+    "s5": {
+      "description": "O banco por um cardápio aprovado, em MCP",
+      "start": "lab04"
+    },
+    "s6": {
+      "description": "Vários agentes, e o limite do roteamento por LLM",
+      "start": "lab05"
+    },
+    "s7": {
+      "description": "Orquestração determinística, dentro do seu processo",
+      "start": "lab06"
+    },
+    "s8": {
+      "description": "A fronteira do time: consumir um agente que não é seu",
+      "start": "lab07"
+    },
+    "s9": {
+      "description": "Avaliação: transformar as regras do curso em teste",
+      "start": "lab08"
+    }
+  },
+  "faces": {
+    "ibm-plex-sans": {
+      "family": "IBM Plex Sans",
+      "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+    }
+  },
+  "designSystems": []
+}

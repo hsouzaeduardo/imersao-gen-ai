@@ -32,6 +32,8 @@ a tabela de tradução conceito a conceito entre as duas pilhas.
 
 ## Para quem vai dar a aula
 
+- [`docs/slides/`](docs/slides/) — o deck do curso, 24 slides. Abra o
+  `deck.html` no navegador; `montar.py` regenera a partir dos fontes.
 - [`docs/roteiros/`](docs/roteiros/) — **um roteiro por lab**, detalhado: partes,
   falas, edições ao vivo com o desfazer, perguntas da turma e o gancho do próximo.
   É o que você abre enquanto dá a aula.
