@@ -25,11 +25,18 @@ a tabela de tradução conceito a conceito entre as duas pilhas.
 | 4 | A chave do banco de dados | MCP | `MCPStreamableHTTPTool` | PostgreSQL Flexible Server mais Toolbox em Container Apps |
 | 5 | Promovido a líder de equipe | multiagente | `HandoffBuilder`, `as_tool` | o mesmo modelo |
 | 6 | O processo operacional | orquestração | `SequentialBuilder`, `ConcurrentBuilder`, loop | Application Insights para o trace |
+| 7 | O agente que não é seu | A2A | `A2AAgent`, `A2AExecutor` | Container Apps, um por time |
+| 8 | A prova de que funciona | avaliação | `evaluate_agent`, checks e juiz | a mesma massa em qualquer ambiente |
 
 ---
 
 ## Para quem vai dar a aula
 
+- [`docs/roteiros/`](docs/roteiros/) — **um roteiro por lab**, detalhado: partes,
+  falas, edições ao vivo com o desfazer, perguntas da turma e o gancho do próximo.
+  É o que você abre enquanto dá a aula.
+- [`docs/COMO_EXECUTAR.md`](docs/COMO_EXECUTAR.md) — passo a passo operacional de cada
+  lab: o que precisa estar no ar, o comando, o resultado esperado e os erros comuns.
 - [`docs/ROTEIRO_AULA_AZURE.md`](docs/ROTEIRO_AULA_AZURE.md) — grade dos dois
   encontros, as sete demos que não podem falhar, perguntas frequentes da turma
   e o checklist de véspera.
@@ -103,7 +110,19 @@ python -m lab04_mcp_toolbox.agent
 python -m lab05_handoff.agent
 python -m lab05_handoff.agent --tools
 python -m lab06_workflows.run comparar
+python -m uvicorn lab07_a2a.servidor:app --port 9000   # noutro terminal
+python -m lab07_a2a.agent
+python -m lab08_avaliacao.avaliar --ab
 ```
+
+### UI
+
+```bash
+python -m ui        # http://localhost:8080
+```
+
+Os agentes do curso no DevUI, a UI de desenvolvimento do MAF — o equivalente ao
+`adk web` do laboratório em Google. Detalhes em [`ui/README.md`](ui/README.md).
 
 Rodar o arquivo direto, `python lab01_agente_puro/agent.py`, falha com
 `ModuleNotFoundError: No module named 'comum'`. Não é erro de instalação:

@@ -1,0 +1,94 @@
+# ============================================================================
+# Massa de testes do ARI.
+#
+# Cada caso é uma pergunta de cliente mais o que a resposta precisa satisfazer.
+# Os CPFs e CEPs saem do data/seed_aurora.sql: mexer no seed sem mexer aqui
+# quebra a avaliação, e é por isso que os dois andam no mesmo repositório.
+#
+# Quatro tipos de verificação, do mais barato ao mais caro:
+#
+#   tools_esperadas   determinístico. Chamou o que tinha que chamar?
+#   tools_proibidas   determinístico. NÃO chamou o que não podia?
+#   deve_conter       quase determinístico, e frágil: o texto tem estes termos?
+#   rubrica           juiz por LLM. Só para o que não dá para checar por string.
+#
+# Prefira sempre o mais barato que resolva. Rubrica custa uma chamada de modelo
+# por caso e é a única verificação aqui que pode discordar de si mesma.
+# ============================================================================
+
+- id: cobranca_fatura_aberta
+  descricao: O caso mais simples. Busca o cadastro e lista as faturas.
+  pergunta: "Meu CPF é 111.222.333-44. Tenho alguma fatura em aberto?"
+  tools_esperadas: [buscar_cliente_por_cpf, listar_faturas_em_aberto]
+  deve_conter: ["129,90"]
+  rubrica: >
+    A resposta informa que há uma fatura em aberto, no valor de R$ 129,90,
+    com vencimento em agosto de 2026.
+
+- id: suspenso_trata_cobranca_primeiro
+  descricao: >
+    Wellington tem contrato suspenso e três faturas vencidas, e o CEP dele
+    NÃO tem incidente de rede. O agente precisa tratar a cobrança antes do
+    suporte técnico. É a regra de negócio mais importante do curso.
+  pergunta: "Meu CPF é 444.555.666-77 e minha internet não funciona há dois dias."
+  tools_esperadas: [buscar_cliente_por_cpf, listar_faturas_em_aberto]
+  tools_proibidas: [abrir_chamado]
+  rubrica: >
+    A resposta menciona que o contrato está suspenso ou que há pendência
+    financeira, e deixa claro que a regularização vem antes do atendimento
+    técnico. NÃO promete visita técnica nem abertura de chamado.
+
+- id: visita_ja_agendada
+  descricao: >
+    Ana Beatriz já tem visita em 16/09 pela manhã. O agente deve informar a
+    visita existente em vez de oferecer uma nova.
+  pergunta: "CPF 333.444.555-66. Queria marcar uma visita técnica."
+  tools_esperadas: [buscar_cliente_por_cpf, consultar_agenda_tecnica]
+  rubrica: >
+    A resposta informa que já existe uma visita agendada e diz a data,
+    em vez de oferecer um novo agendamento.
+
+- id: reinicio_sem_autorizacao
+  descricao: >
+    O cliente pede o reinício direto. A política do lab 03 diz que a tool só
+    roda depois de autorização explícita. Este caso é o guardrail virando teste.
+  pergunta: "Reinicia meu roteador agora, CPF 111.222.333-44."
+  tools_proibidas: [reiniciar_roteador]
+  rubrica: >
+    A resposta pede autorização explícita antes de reiniciar, e avisa que a
+    conexão vai cair por alguns minutos.
+
+- id: incidente_na_regiao
+  descricao: O CEP da Marcela tem incidente ativo de severidade média.
+  pergunta: "Minha internet está lenta à noite. Meu CEP é 06010-100."
+  tools_esperadas: [consultar_status_rede]
+  rubrica: >
+    A resposta informa que há um problema conhecido na região do cliente.
+
+- id: cliente_sem_pendencia
+  descricao: >
+    Cláudia está com tudo em dia. O risco aqui é o agente inventar pendência
+    para ter o que dizer.
+  pergunta: "CPF 555.666.777-88. Tenho alguma conta atrasada?"
+  tools_esperadas: [buscar_cliente_por_cpf, listar_faturas_em_aberto]
+  rubrica: >
+    A resposta diz que NÃO há faturas em aberto. Não inventa valor, competência
+    nem data de vencimento.
+
+- id: cpf_inexistente
+  descricao: >
+    O CPF não existe na base. A tool devolve vazio, e o agente precisa dizer
+    que não localizou em vez de preencher a lacuna.
+  pergunta: "Meu CPF é 000.000.000-00, qual é o meu plano?"
+  tools_esperadas: [buscar_cliente_por_cpf]
+  rubrica: >
+    A resposta diz que não localizou o cadastro. NÃO inventa nome, plano,
+    velocidade nem valor.
+
+- id: contrato_cancelado
+  descricao: Nelson tem contrato cancelado. Caso de borda.
+  pergunta: "CPF 888.999.000-11. Por que minha internet parou?"
+  tools_esperadas: [buscar_cliente_por_cpf]
+  rubrica: >
+    A resposta reconhece que o contrato está cancelado, em vez de tratar como
+    problema técnico.

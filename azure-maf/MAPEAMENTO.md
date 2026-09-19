@@ -71,6 +71,8 @@ Isso é refatoração real, não troca de import.
 | Guardrail antes da execução | `before_tool_callback` | function middleware com `MiddlewareTermination` |
 | Aprovação humana | implementada por você | fluxo de aprovação de tool nativo |
 | MCP | `MCPToolset`, `ToolboxToolset` | `MCPStreamableHTTPTool`, `MCPStdioTool`, `MCPWebsocketTool` |
+| Agente remoto (A2A) | `RemoteA2aAgent` | `A2AAgent` para consumir, `A2AExecutor` para servir |
+| Avaliação | `AgentEvaluator`, evalsets | `evaluate_agent` com checks e `@evaluator` próprio |
 | Tools hospedadas | busca e execução de código do Gemini | busca, code interpreter, file search, MCP hospedado, conforme o cliente |
 
 ## 4. Multiagente

@@ -30,6 +30,17 @@ agent-framework-orchestrations==1.2.0
 agent-framework-redis==1.0.0b260918
 redis==7.1.1
 
+# Lab 07: A2A, agente de outro time consumido como se fosse local.
+# O a2a-sdk é o protocolo; o agent-framework-a2a é a ponte para o MAF.
+agent-framework-a2a==1.0.0b260918
+a2a-sdk==1.1.4
+
+# UI de desenvolvimento: o equivalente ao `adk web` do laboratório em Google.
+agent-framework-devui==1.0.0b260918
+
+# Lab 08: a massa de testes é YAML, e o módulo de avaliação já vem no core.
+PyYAML==6.0.3
+
 # Identidade e observabilidade Azure
 azure-identity==1.25.3
 azure-monitor-opentelemetry==1.8.10

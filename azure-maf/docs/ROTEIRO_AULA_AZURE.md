@@ -25,17 +25,18 @@ e a fala de cada momento — está em
 | Bloco | Tempo | Conteúdo | Momento chave |
 |---|---|---|---|
 | Retomada | 15 min | o quadro do MAPEAMENTO.md | onde estamos, nas duas pilhas |
-| Lab 04 | 90 min | MCP Toolbox em Container Apps | editar o tools.yaml e reiniciar só o Toolbox |
+| Lab 04 | 80 min | MCP Toolbox em Container Apps | editar o tools.yaml e reiniciar só o Toolbox |
 | Intervalo | 15 min | | |
-| Lab 05 | 70 min | handoff e `as_tool` | apagar a description e ver o roteamento desandar |
-| Lab 06 | 80 min | sequential, concurrent, loop | `run comparar` com os dois tempos na tela |
-| Fechamento | 30 min | ADK versus MAF, e o que sobrevive à troca | a seção 7 do MAPEAMENTO.md |
+| Lab 05 | 60 min | handoff e `as_tool` | apagar a description e ver o roteamento desandar |
+| Lab 06 | 70 min | sequential, concurrent, loop | `run comparar` com os dois tempos na tela |
+| Lab 07 | 45 min | A2A, o agente de outro time | derrubar o servidor do outro time ao vivo |
+| Fechamento | 25 min | ADK versus MAF, e o que sobrevive à troca | a seção 7 do MAPEAMENTO.md |
 
 ---
 
-## As sete demos que não podem falhar
+## As oito demos que não podem falhar
 
-As seis da versão ADK, mais uma que só existe aqui.
+As seis da versão ADK, mais duas que só existem aqui.
 
 1. **Lab 01**: instruction vaga contra instruction protocolo.
 2. **Lab 01, extra Azure**: trocar `ARI_CLIENT=aoai` por `foundry`.
@@ -45,7 +46,10 @@ As seis da versão ADK, mais uma que só existe aqui.
 4. **Lab 03**: descrição da tool trocada por "Consulta coisas".
 5. **Lab 04**: editar o `tools.yaml`, reiniciar o Toolbox, comportamento novo.
 6. **Lab 06**: `run comparar`, os dois tempos na tela.
-7. **Fechamento**: a árvore de trace no Application Insights,
+7. **Lab 07, extra Azure**: derrubar o servidor A2A no meio do atendimento.
+   O especialista vira dependência de rede na frente da turma, e a conversa sobre
+   timeout, versão e plantão acontece sozinha.
+8. **Fechamento**: a árvore de trace no Application Insights,
    com o custo em tokens de um atendimento inteiro.
 
 ---
@@ -63,6 +67,12 @@ este arquivo é idêntico ao do laboratório em Google. Byte a byte.
 Trocamos o framework inteiro e a camada de dados não sentiu.
 Quando vocês forem decidir stack de agente, decidam o acesso a dado primeiro:
 é a decisão com maior meia-vida das três.
+
+**No lab 07, depois de derrubar o servidor:**
+vocês acabaram de ver o custo da fronteira. Importar a classe do outro time era
+mais simples, e amarrava os dois deploys. A pergunta de arquitetura não é se A2A
+é melhor: é se essa fronteira já existe na organização de vocês.
+Se existe, o protocolo só a torna honesta.
 
 **No fechamento do lab 06:**
 vocês viram o mesmo problema resolvido em dois frameworks.
@@ -104,3 +114,7 @@ de arquitetura do curso inteiro e custa 15 minutos.
 - [ ] `docker compose -f docker-compose.local.yml up -d` testado como plano B de rede
 - [ ] Application Insights com dados, o trace demora alguns minutos para aparecer
 - [ ] `prontuarios.json` apagado, para o lab 02b começar limpo
+- [ ] servidor do lab 07 testado: `python -m uvicorn lab07_a2a.servidor:app --port 9000`
+      e `curl localhost:9000/.well-known/agent-card.json` respondendo
+- [ ] `python -m ui` subindo com as 7 entidades, se for usar o DevUI no projetor
+- [ ] portas livres na máquina do instrutor: 5000, 8000, 8080, 9000
