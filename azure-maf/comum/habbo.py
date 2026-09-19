@@ -36,31 +36,38 @@ LIMITE_FALA = 140  # a API corta acima disso
 # Os nomes vêm do `name=` de cada Agent. Quem não estiver aqui não aparece,
 # o que é melhor que aparecer no avatar de outro e confundir a leitura.
 MAPA: dict[str, int] = {
-    # Labs 01 a 04: o ARI trabalha sozinho, sempre na Ana.
+    # A sala tem 12 avatares, e o curso tem 19 agentes. O critério do rateio é
+    # um só: quem pode aparecer AO MESMO TEMPO precisa de avatar diferente.
+    # Quem nunca divide a tela pode dividir o avatar.
+    #
+    # Labs 01 a 04: um por avatar, porque cada um roda sozinho.
     "ari_n1": 1,
-    "ari_com_caderno": 1,
-    "ari_com_prontuario": 1,
-    "ari_com_acesso": 1,
-    "ari_com_dados": 1,
-    # Lab 05: coordenador e especialistas.
-    "ari_coordenador": 2,
-    "ari_maestro": 2,
-    "agente_cobranca": 3,
-    "agente_tecnico": 4,
-    "agente_agendamento": 8,
-    # Lab 06: o POP em ordem fixa.
-    "etapa_triagem": 2,
-    "etapa_diagnostico": 9,
-    "etapa_registro": 10,
-    # Lab 06: as três checagens concorrentes, lado a lado na fileira do meio.
-    # É esta linha que a turma olha quando você compara sequencial e paralelo.
-    "checagem_financeira": 5,
-    "checagem_rede": 6,
-    "checagem_historico": 7,
-    # Lab 06: o loop de qualidade.
-    "consolidador": 11,
-    "redator": 12,
-    "critico": 4,
+    "ari_com_caderno": 2,
+    "ari_com_prontuario": 3,
+    "ari_com_acesso": 4,
+    "ari_com_dados": 5,
+    # Quem coordena. Os três nunca rodam juntos.
+    "ari_coordenador": 6,
+    "ari_maestro": 6,
+    "ari_maestro_a2a": 6,
+    # Os três especialistas do lab 05, as três checagens paralelas do lab 06 e
+    # as três etapas do POP caem nos mesmos 7, 8 e 9. É a fileira que a turma
+    # olha quando você compara sequencial e concorrente, e por isso ela precisa
+    # de três avatares distintos — nunca junte duas destas linhas no mesmo id.
+    "agente_cobranca": 7,
+    "checagem_financeira": 7,
+    "etapa_triagem": 7,
+    "agente_tecnico": 8,
+    "checagem_rede": 8,
+    "etapa_diagnostico": 8,
+    "tecnico_aurora": 8,
+    "agente_agendamento": 9,
+    "checagem_historico": 9,
+    "etapa_registro": 9,
+    # O fecho do lab 06.
+    "consolidador": 10,
+    "redator": 11,
+    "critico": 12,
 }
 
 # Nome da tool -> frase legível. Sem isto o balão mostra identificador de
